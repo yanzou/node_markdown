@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "MyApp",
+  "version": "0.0.1",
+  "engines": {
+    "node": "0.10.24"
+  },
+  "dependencies": {
+    "connect-livereload": "^0.3.2",
+    "express": "~3.4.8",
+    "gulp": "~3.8.0",
+    "gulp-changed": "~0.2.0",
+    "gulp-clean": "~0.2.4",
+    "gulp-concat": "~2.1.7",
+    "gulp-if": "0.0.5",
+    "gulp-markdown": "^1.0.0",
+    "gulp-util": "~2.2.14",
+    "marked": "^0.3.2",
+    "tiny-lr": "0.0.5"
+  }
+}
