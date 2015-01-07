@@ -1,3 +1,18 @@
+body {
+    /*font-size: 20px;*/
+}
+
 .markdown-contents {
     margin-top: 60px;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+}
+
+img.node-struct {
+    width: 80%;
+    margin-left: 25px;
 }
