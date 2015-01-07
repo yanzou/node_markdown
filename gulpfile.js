@@ -3,10 +3,13 @@ var gutil     = require('gulp-util');
 var clean     = require('gulp-clean');
 var markdown  = require('gulp-markdown');
 var path      = require('path');
+var routes = require('./routes');
 
 var paths = {
   src: "markdowns/**/*.md",
-  dest: "public/"
+  app: ["routes/**/*.js", "views/**/*.jade"],
+  dest: "public/contents",
+  public: "public"
 },
   PORT =  4000,
   LIVE_RELOAD_PORT = 35729,
@@ -32,12 +35,16 @@ gulp.task('markdown', function () {
     .pipe(livereload(config.tlr));
 });
 
+gulp.task('app', function () {
+  return gulp.src(paths.app).pipe(livereload(config.tlr));
+});
 
 gulp.task('watch', function() {
   startLivereload();
   startExpress();
 
   gulp.watch(paths.src,  ['markdown']);
+  gulp.watch(paths.app,  ['app']);
 });
 
 gulp.task('default', ['clean'], function () {
@@ -52,15 +59,12 @@ function startExpress() {
   var express = require('express'),
     app = express();
   app.use(require('connect-livereload')({ port: LIVE_RELOAD_PORT }));
-  app.use(express.static(path.join(__dirname, paths.dest)));
+  app.use(express.static(path.join(__dirname, paths.public)));
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.listen(PORT);
 
-  app.get('/', function(req, res){
-    res.render('index');
-  });
-
+  routes.route(app);
   gutil.log('Express listening on: ' + gutil.colors.magenta(PORT));
 }
 
