@@ -117,3 +117,13 @@
 </ol>
 <p><img src="assets/images/multiThreadedServer.png" alt="multiThreadServer"></p>
 <p><img src="assets/images/NodeJS-EventedIOAsyncIO_latest.png" alt="EventedIO"></p>
+<p>异步 I/O</p>
+<pre><code>// fs 是 Node.js 中的文件管理系统
+var fs = require(&#39;fs&#39;);
+
+fs.readFile(&#39;path/to/file&#39;, function (err, file) {
+    console.log(&#39;读取完成&#39;);
+});
+
+console.log(&#39;发起读取&#39;);
+</code></pre><p><img src="assets/images/asyncio.png" alt="EventedIO"></p>
