@@ -7,9 +7,11 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1")
     meta(name="apple-mobile-web-app-capable", content="yes")
     link(rel='stylesheet', href='assets/css/bootstrap.min.css')
+    link(rel='stylesheet', href='assets/css/codepen-embed.css')
     link(rel='stylesheet', href='assets/css/main.css')
     script(type="text/javascript" src="assets/js/jquery.min.js")
     script(type="text/javascript" src="assets/js/bootstrap.min.js")
+    script(type="text/javascript" src="assets/js/highlight.js")
 
   body.markdown-body
     .navbar.navbar-inverse.navbar-fixed-top(role="navigation")
@@ -32,3 +34,6 @@ html
 
     .container.markdown-contents
       include ../public/contents/main.html
+
+    script(type='text/javascript').
+      hljs.initHighlightingOnLoad();  

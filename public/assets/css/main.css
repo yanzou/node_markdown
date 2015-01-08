@@ -16,3 +16,8 @@ img.node-struct {
     width: 80%;
     margin-left: 25px;
 }
+
+img[alt=node_chrome] {
+    width: 60%;
+}
+

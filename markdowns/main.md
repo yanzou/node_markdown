@@ -1,11 +1,51 @@
-# A Nodejs Introduction
+# A Node.js Introduction
 -------------------------------
 
 1. **What**'s Nodejs ?
 2. **Why** Javascript ?
 3. What **can** Nodejs do ?
+<br>
+<br>
 
-## 1 JavaScript Basic
+## 1. Node.js Intro
+----------------------------------------
+   1. 创始人**Ryan Dahl**  
+    ![node_chrome](assets/images/Ryan Dahl.jpg) 
+
+   2. Node.js第一个版本发布于2009年
+   
+   在创造出 Node.js 之前，他是一名资深的 C/C++ 工程师，主要工作都是围绕高性能 Web 服务器进行的。   
+   在经过自己的不断摸索之后，他提出了高性能服务器的几个要点：**事件驱动，非阻塞 I/O** 。 
+   
+    _Ryan Dahl 现在已经不参与 Node.js 的开发维护了，他在把 Node.js 的整体架构基本构建完成之后就消失了。。。_
+
+   2. **选择 JavaScript**
+   
+   在写 Node.js 的时候，Ryan Dahl 曾经评估过 C、Lua、Haskell、Ruby 等语言作为备选实现。
+    
+   最后都弃用了，包括如下原因：
+   
+    * C 的开发门槛高
+    * Lua 自身已经有很多阻塞 I/O 库，历史包袱比较重
+    * Haskell 落选是因为 Ryan Dahl 觉得自己还玩不转它。。。
+    * Ruby 的虚拟机性能不给力，所以也落选了
+    
+   **而 JavaScript:** 
+         
+    * 虽然坑多，但是初学起来还是比较容易,
+    * 之前在服务端毫无表现，所以没有历史包袱
+    * JS 之前在前端开发中，基于事件驱动有广泛的应用
+    
+        ```javascript
+            $('button').on('click', function () {
+                // ...
+            });
+        ```
+
+<br>
+<br>
+
+## 2. JavaScript Basic
 -------------------------------
 
 1. 变量
@@ -47,9 +87,16 @@
     //or      
     person = {firstName: "Bill", lastName: "Gates", age: 18}
     ```
-4. 回调和闭包
+4. 回调
     ```javascript
-    
+    //对于一个简单的数据库访问操作，传统方式是这样实现的
+    res = db.query('SELECT * from some_table');
+    res.output();
+
+    //异步的处理方式
+    db.query('SELECT * from some_table', function(res) { 
+       res.output();
+    });
     ```
 
 4. _JavaScript 类_
@@ -77,38 +124,12 @@
       
       ![node_chrome](assets/images/chrome_vs_node.png)  
 
-## Node Intro
-   1. **Ryan Dahl** 是 Node.js 的创始人, Node.js第一个版本发布于2009年
-   
-   在创造出 Node.js 之前，他是一名资深的 C/C++ 工程师，主要工作都是围绕高性能 Web 服务器进行的。   
-   在经过自己的不断摸索之后，他提出了高性能服务器的几个要点：**事件驱动，非阻塞 I/O** 。 
-   
-    _Ryan Dahl 现在已经不参与 Node.js 的开发维护了，他在把 Node.js 的整体架构基本构建完成之后就消失了。。。_
 
-   2. **选择 JavaScript**
-   
-   在写 Node.js 的时候，Ryan Dahl 曾经评估过 C、Lua、Haskell、Ruby 等语言作为备选实现。
-    
-   最后都弃用了，包括如下原因：
-   
-    * C 的开发门槛高
-    * Lua 自身已经有很多阻塞 I/O 库，历史包袱比较重
-    * Haskell 落选是因为 Ryan Dahl 觉得自己还玩不转它。。。
-    * Ruby 的虚拟机性能不给力，所以也落选了
-    
-   **而 JavaScript:** 
-         
-    * 虽然坑多，但是初学起来还是比较容易,
-    * 之前在服务端毫无表现，所以没有历史包袱
-    * JS 之前在前端开发中，基于事件驱动有广泛的应用
-    
-        ```javascript
-            $('button').on('click', function () {
-                // ...
-            });
-        ```
 
-## Structure
+<br>
+<br>
+
+## 3. 结构
    
 <img class="node-struct" src="assets/images/struct2.jpg">
   
@@ -122,22 +143,76 @@
 4. 在 Windows 下，libuv 使用了 Windows 的 IOCP（Input/Output Completion Port，输入输出完成端口）机制，
 以在不同平台下实现同样的高性能。
 
+<img class="node-struct2" src="assets/images/struct.png">
 
+<br>
+<br>
+
+5. 事件循环和异步IO
 ![multiThreadServer](assets/images/multiThreadedServer.png)
 
 ![EventedIO](assets/images/NodeJS-EventedIOAsyncIO_latest.png)
 
+<br>
+<br>
 
 异步 I/O
 ```
 // fs 是 Node.js 中的文件管理系统
 var fs = require('fs');
 
-fs.readFile('path/to/file', function (err, file) {
+fs.readFile('/tmp/helloworld', function (err, file) {
     console.log('读取完成');
 });
-
 console.log('发起读取');
+
+//var afterRead = funcion(err, file) {console.log('读取完成');}
+//fs.readFile('/tmp/helloworld', afterRead);
+//console.log('发起读取');
+
 ```
 
 ![EventedIO](assets/images/asyncio.png)
+
+<br>
+<br>
+<br>
+<br>
+```
+var fs = require('fs');
+
+fs.readFile('/tmp/helloworld', function (err, file) {
+    console.log('1读取完成');
+});
+console.log('发起读取');
+
+fs.readFile('/tmp/helloworld2', function (err, file) {
+    console.log('2读取完成');
+});
+
+```
+
+![async_io](assets/images/async_io.png)
+
+<br>
+<br>
+<br>
+
+## 4. 简单例子
+---------------------------------------
+
+### 1. [FileSystem](http://nodejs.org/api/fs.html "Title")
+### 2. [net](http://nodejs.org/api/net.html "Title")
+### 3. [HTTP](http://nodejs.org/api/http.html "Title")
+### 4. [Express](https://github.com/strongloop/express "Title")
+
+
+<br>
+<br>
+<br>
+![when](assets/images/when.png)
+
+
+
+
+

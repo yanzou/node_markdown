@@ -1,11 +1,46 @@
-<h1 id="a-nodejs-introduction">A Nodejs Introduction</h1>
+<h1 id="a-node-js-introduction">A Node.js Introduction</h1>
 <hr>
 <ol>
 <li><strong>What</strong>&#39;s Nodejs ?</li>
 <li><strong>Why</strong> Javascript ?</li>
-<li>What <strong>can</strong> Nodejs do ?</li>
+<li>What <strong>can</strong> Nodejs do ?
+<br>
+<br></li>
 </ol>
-<h2 id="1-javascript-basic">1 JavaScript Basic</h2>
+<h2 id="1-node-js-intro">1. Node.js Intro</h2>
+<hr>
+<ol>
+<li><p>创始人<strong>Ryan Dahl</strong><br><img src="assets/images/Ryan Dahl.jpg" alt="node_chrome"> </p>
+</li>
+<li><p>Node.js第一个版本发布于2009年</p>
+<p>在创造出 Node.js 之前，他是一名资深的 C/C++ 工程师，主要工作都是围绕高性能 Web 服务器进行的。<br>在经过自己的不断摸索之后，他提出了高性能服务器的几个要点：<strong>事件驱动，非阻塞 I/O</strong> 。 </p>
+<p><em>Ryan Dahl 现在已经不参与 Node.js 的开发维护了，他在把 Node.js 的整体架构基本构建完成之后就消失了。。。</em></p>
+</li>
+<li><p><strong>选择 JavaScript</strong></p>
+<p>在写 Node.js 的时候，Ryan Dahl 曾经评估过 C、Lua、Haskell、Ruby 等语言作为备选实现。</p>
+<p>最后都弃用了，包括如下原因：</p>
+<ul>
+<li>C 的开发门槛高</li>
+<li>Lua 自身已经有很多阻塞 I/O 库，历史包袱比较重</li>
+<li>Haskell 落选是因为 Ryan Dahl 觉得自己还玩不转它。。。</li>
+<li>Ruby 的虚拟机性能不给力，所以也落选了</li>
+</ul>
+<p><strong>而 JavaScript:</strong> </p>
+<ul>
+<li>虽然坑多，但是初学起来还是比较容易,</li>
+<li>之前在服务端毫无表现，所以没有历史包袱</li>
+<li><p>JS 之前在前端开发中，基于事件驱动有广泛的应用</p>
+<pre><code class="lang-javascript">    $(&#39;button&#39;).on(&#39;click&#39;, function () {
+        // ...
+    });
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p><br>
+<br></p>
+<h2 id="2-javascript-basic">2. JavaScript Basic</h2>
 <hr>
 <ol>
 <li><p>变量</p>
@@ -44,9 +79,15 @@
  person = {firstName: &quot;Bill&quot;, lastName: &quot;Gates&quot;, age: 18}
 </code></pre>
 </li>
-<li><p>回调和闭包</p>
-<pre><code class="lang-javascript">
+<li><p>回调</p>
+<pre><code class="lang-javascript"> //对于一个简单的数据库访问操作，传统方式是这样实现的
+ res = db.query(&#39;SELECT * from some_table&#39;);
+ res.output();
 
+ //异步的处理方式
+ db.query(&#39;SELECT * from some_table&#39;, function(res) { 
+    res.output();
+ });
 </code></pre>
 </li>
 <li><p><em>JavaScript 类</em></p>
@@ -73,35 +114,9 @@
 </ol>
 </li>
 </ol>
-<h2 id="node-intro">Node Intro</h2>
-<ol>
-<li><p><strong>Ryan Dahl</strong> 是 Node.js 的创始人, Node.js第一个版本发布于2009年</p>
-<p>在创造出 Node.js 之前，他是一名资深的 C/C++ 工程师，主要工作都是围绕高性能 Web 服务器进行的。<br>在经过自己的不断摸索之后，他提出了高性能服务器的几个要点：<strong>事件驱动，非阻塞 I/O</strong> 。 </p>
-<p><em>Ryan Dahl 现在已经不参与 Node.js 的开发维护了，他在把 Node.js 的整体架构基本构建完成之后就消失了。。。</em></p>
-</li>
-<li><p><strong>选择 JavaScript</strong></p>
-<p>在写 Node.js 的时候，Ryan Dahl 曾经评估过 C、Lua、Haskell、Ruby 等语言作为备选实现。</p>
-<p>最后都弃用了，包括如下原因：</p>
-<ul>
-<li>C 的开发门槛高</li>
-<li>Lua 自身已经有很多阻塞 I/O 库，历史包袱比较重</li>
-<li>Haskell 落选是因为 Ryan Dahl 觉得自己还玩不转它。。。</li>
-<li>Ruby 的虚拟机性能不给力，所以也落选了</li>
-</ul>
-<p><strong>而 JavaScript:</strong> </p>
-<ul>
-<li>虽然坑多，但是初学起来还是比较容易,</li>
-<li>之前在服务端毫无表现，所以没有历史包袱</li>
-<li><p>JS 之前在前端开发中，基于事件驱动有广泛的应用</p>
-<pre><code class="lang-javascript">    $(&#39;button&#39;).on(&#39;click&#39;, function () {
-        // ...
-    });
-</code></pre>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="structure">Structure</h2>
+<p><br>
+<br></p>
+<h2 id="3-">3. 结构</h2>
 <p><img class="node-struct" src="assets/images/struct2.jpg"></p>
 <ol>
 <li><p>Node.js 用异步式 I/O 和事件驱动代替多线程，带来了可观的性能提升</p>
@@ -115,15 +130,54 @@
 以在不同平台下实现同样的高性能。</p>
 </li>
 </ol>
-<p><img src="assets/images/multiThreadedServer.png" alt="multiThreadServer"></p>
+<p><img class="node-struct2" src="assets/images/struct.png"></p>
+<p><br>
+<br></p>
+<ol>
+<li>事件循环和异步IO
+<img src="assets/images/multiThreadedServer.png" alt="multiThreadServer"></li>
+</ol>
 <p><img src="assets/images/NodeJS-EventedIOAsyncIO_latest.png" alt="EventedIO"></p>
+<p><br>
+<br></p>
 <p>异步 I/O</p>
 <pre><code>// fs 是 Node.js 中的文件管理系统
 var fs = require(&#39;fs&#39;);
 
-fs.readFile(&#39;path/to/file&#39;, function (err, file) {
+fs.readFile(&#39;/tmp/helloworld&#39;, function (err, file) {
     console.log(&#39;读取完成&#39;);
 });
-
 console.log(&#39;发起读取&#39;);
+
+//var afterRead = funcion(err, file) {console.log(&#39;读取完成&#39;);}
+//fs.readFile(&#39;/tmp/helloworld&#39;, afterRead);
+//console.log(&#39;发起读取&#39;);
 </code></pre><p><img src="assets/images/asyncio.png" alt="EventedIO"></p>
+<p><br>
+<br>
+<br>
+<br></p>
+<pre><code>var fs = require(&#39;fs&#39;);
+
+fs.readFile(&#39;/tmp/helloworld&#39;, function (err, file) {
+    console.log(&#39;1读取完成&#39;);
+});
+console.log(&#39;发起读取&#39;);
+
+fs.readFile(&#39;/tmp/helloworld2&#39;, function (err, file) {
+    console.log(&#39;2读取完成&#39;);
+});
+</code></pre><p><img src="assets/images/async_io.png" alt="async_io"></p>
+<p><br>
+<br>
+<br></p>
+<h2 id="4-">4. 简单例子</h2>
+<hr>
+<h3 id="1-filesystem-http-nodejs-org-api-fs-html-title-">1. <a href="http://nodejs.org/api/fs.html" title="Title">FileSystem</a></h3>
+<h3 id="2-net-http-nodejs-org-api-net-html-title-">2. <a href="http://nodejs.org/api/net.html" title="Title">net</a></h3>
+<h3 id="3-http-http-nodejs-org-api-http-html-title-">3. <a href="http://nodejs.org/api/http.html" title="Title">HTTP</a></h3>
+<h3 id="4-express-https-github-com-strongloop-express-title-">4. <a href="https://github.com/strongloop/express" title="Title">Express</a></h3>
+<p><br>
+<br>
+<br>
+<img src="assets/images/when.png" alt="when"></p>
